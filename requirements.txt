@@ -1,6 +1,0 @@
-streamlit
-fastapi
-uvicorn
-pandas
-pydantic
-firebase-admin
