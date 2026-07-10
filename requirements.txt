@@ -1,0 +1,9 @@
+fastapi
+firebase-admin
+fpdf
+pandas
+Pillow
+pydantic
+streamlit>=1.36.0
+uvicorn
+pytz
