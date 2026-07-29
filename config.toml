@@ -1,0 +1,32 @@
+[theme]
+base="dark"
+
+[server]
+# App ko Production/Live mode mein chalane ke liye
+headless = true
+
+# Background mein file changes check karna band karega (Isse CPU speed badhegi)
+runOnSave = false
+
+# Faltu network aur cross-origin security checks band karta hai (Fast loading)
+enableCORS = false
+enableXsrfProtection = false
+
+# Streamlit ko background mein tera usage data collect karne se rokta hai
+gatherUsageStats = false
+
+# WebSockets ka data compress karke bhejta hai taaki internet kam use ho aur app fast chale
+enableWebsocketCompression = true
+
+[global]
+# Development warnings aur features ko puri tarah band karke RAM bachata hai
+developmentMode = false
+showWarningOnDirectExecution = false
+
+[client]
+# Upar aane wale Streamlit ke menu/toolbar ko minimal karta hai taaki UI jaldi render ho
+toolbarMode = "minimal"
+
+[browser]
+# Browser side se bhi data collection band karta hai
+gatherUsageStats = false
