@@ -7,3 +7,4 @@ pydantic
 streamlit>=1.36.0
 uvicorn
 pytz
+starlette==0.37.2
