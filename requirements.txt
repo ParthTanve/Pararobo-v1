@@ -1,0 +1,14 @@
+fastapi
+firebase-admin
+fpdf
+pandas
+Pillow
+pydantic
+streamlit>=1.36.0
+uvicorn
+pytz
+starlette==0.37.2
+python-dotenv
+firebase-admin>=6.5.0
+google-cloud-firestore>=2.16.0
+grpcio>=1.62.0
