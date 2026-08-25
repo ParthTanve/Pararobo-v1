@@ -1,37 +1,42 @@
 import re
 import os
 import json
-import firebase_admin
-from firebase_admin import credentials, firestore
+from google.oauth2 import service_account
+from google.cloud import firestore
 
 # ==========================================
-# FIREBASE SETUP (CLEAN SDK INITIALIZATION)
+# FIREBASE SETUP (BYPASSING THE ENCODING BUG)
 # ==========================================
 
-# Clean up conflicting env variables
+# 1. Clean up conflicting env variables
 for key in ["GOOGLE_CLOUD_PROJECT", "GCLOUD_PROJECT", "GOOGLE_APPLICATION_CREDENTIALS"]:
     os.environ.pop(key, None)
 
+# 2. Locate JSON Key
 render_path = "/etc/secrets/firebase_credentials.json"
 local_path = "firebase_credentials.json"
 file_path = render_path if os.path.exists(render_path) else local_path
 
-# 1. INITIALIZE FIREBASE ADMIN (NO FORCED STRINGS)
-if not firebase_admin._apps:
-    try:
-        cred = credentials.Certificate(file_path)
-        # Nayi library bina explicit database id ke automatically sahi database dhoondh legi
-        firebase_admin.initialize_app(cred)
-        print("✅ Firebase Admin Initialized Successfully!")
-    except Exception as e:
-        print(f"❌ Firebase Init Error: {e}")
-
-# 2. CONNECT FIRESTORE CLIENT
+# 3. Read Project ID
+project_id = None
 try:
-    db = firestore.client()
-    print("✅ Firestore Client Connected Properly!")
+    with open(file_path, "r") as f:
+        key_data = json.load(f)
+    project_id = key_data.get("project_id")
 except Exception as e:
-    print(f"❌ Firestore Client Error: {e}")
+    print(f"Error reading JSON: {e}")
+
+# 4. 🟢 THE FIX: Direct Google Cloud Client (No database parameter)
+try:
+    cred = service_account.Credentials.from_service_account_file(file_path)
+    
+    # Yahan humne database="(default)" jaan-boojh kar HATA diya hai 
+    # taaki brackets encode na ho aur bug bypass ho jaye!
+    db = firestore.Client(credentials=cred, project=project_id)
+    
+    print("✅ Firestore Client Connected Properly without encoding bug!")
+except Exception as e:
+    print(f"❌ Firestore Error: {e}")
     db = None
 
 # ==========================================
