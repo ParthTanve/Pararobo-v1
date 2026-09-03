@@ -996,8 +996,8 @@ def show_intern_page():
                             time_msg_in, time_msg_out = "Check-In has not started yet.", "Check-Out is only allowed between 06:25 PM and 07:00 PM for Slot 2."
                     else: 
                         if sel_intern in ["Kalyani Bhuyarkar", "Surbhi Harde"]:
-                            checkin_start, checkin_end, checkout_start, checkout_end = datetime.time(10, 50), datetime.time(11, 10), datetime.time(18,25), datetime.time(19, 00)
-                            time_msg_in, time_msg_out = "Check-In has not started yet (Starts at 10:50 AM).", "Check-Out is only allowed between 06:25 PM and 07:00 PM."
+                            checkin_start, checkin_end, checkout_start, checkout_end = datetime.time(10, 50), datetime.time(11, 00), datetime.time(18,25), datetime.time(19, 00)
+                            time_msg_in, time_msg_out = "Check-In has not started yet (Starts at 10:50 AM to 11.00AM).", "Check-Out is only allowed between 06:25 PM and 07:00 PM."
                         else:
                             checkin_start, checkin_end, checkout_start, checkout_end = datetime.time(9, 50), datetime.time(10, 10), datetime.time(18,25), datetime.time(19, 00)
                             time_msg_in, time_msg_out = "Check-In has not started yet.", "Check-Out is only allowed between 06:25 PM and 07:00 PM."
